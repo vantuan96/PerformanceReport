@@ -1,0 +1,152 @@
+﻿@model IEnumerable<Kztek_Model.Models.Time_ServerLog>
+@{
+    ViewBag.Title = "Biểu đồ thời gian";
+    var authModel = (Kztek_Library.Models.AuthActionModel)ViewBag.AuthValue;
+    var windowMongos = Model != null ? Model.Where(n => n.OS == "WINDOW" && n.Database == "MONGODB").OrderBy(n => n.NumberRecord).ToList() : new List<Kztek_Model.Models.Time_ServerLog>();
+    var linuxMongos = Model != null ? Model.Where(n => n.OS == "LINUX" && n.Database == "MONGODB").OrderBy(n => n.NumberRecord).ToList() : new List<Kztek_Model.Models.Time_ServerLog>();
+
+
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+@*<div class="row">
+        @using (Html.BeginForm("ChartCPURAM", "Report", FormMethod.Get, new { id = "frmUser" }))
+        {
+            <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+                <input type="text" name="key" value="@ViewBag.keyValue" placeholder="Từ khóa" class="form-control" />
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+                <button class="btn btn-white btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm </button>
+                <a href='@Url.Action("ChartCPURAM", "Report")' class="btn btn-primary btn-white" type="submit">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                    Reset
+                </a>
+            </div>
+        }
+    </div>*@
+
+<div id="chartContainer" style="height: 300px; width: 100%;">
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            load();
+        });
+
+        function load() {
+            var dtWinMon = [];
+            var dtLinuxMon = [];
+            Item = function (NumberRecord, Time) {
+                var obj = this;
+                obj.NumberRecord = NumberRecord;
+                obj.Time = Time;
+            }
+
+            @if (windowMongos != null && windowMongos.Count > 0)
+            {
+                foreach(var item in windowMongos)
+                {
+                   @:dtWinMon.push(new Item('@item.NumberRecord', '@item.TimeFinished'));
+                }
+            }
+
+            @if (linuxMongos != null && linuxMongos.Count > 0)
+            {
+                foreach(var item in linuxMongos)
+                {
+                   @:dtLinuxMon.push(new Item('@item.NumberRecord', '@item.TimeFinished'));
+                }
+            }
+
+            LoadChartMongo(dtWinMon,dtLinuxMon);
+
+        }
+        function LoadChartMongo(dtWinMon,dtLinuxMon) {
+            var arrWM = [];//window     
+            var arrLM = [];//linux 
+           
+            //window
+            for (i = 0; i < dtWinMon.length; i++) {
+                var objWM= {
+                    label: dtWinMon[i].NumberRecord,
+                    y: parseInt(dtWinMon[i].Time)
+                }            
+                arrWM.push(objWM);
+            }
+
+            //linux
+            for (i = 0; i < dtLinuxMon.length; i++) {
+                var objLM = {
+                    label: dtLinuxMon[i].NumberRecord,
+                    y: parseInt(dtLinuxMon[i].Time)
+                }
+                arrLM.push(objLM);
+            }
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: "CHART MONGODB"
+                },
+                axisY: [{
+                    title: "Times",
+                    lineColor: "#C24642",
+                    tickColor: "#C24642",
+                    labelFontColor: "#C24642",
+                    titleFontColor: "#C24642",
+                    suffix: "ms"
+                }],
+                axisX: {
+                    title: "Rows",
+                    lineColor: "#7F6084",
+                    tickColor: "#7F6084",
+                    labelFontColor: "#7F6084",
+                    titleFontColor: "#7F6084"
+                },
+                toolTip: {
+                    shared: true
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: toggleDataSeries
+                },
+                data: [
+                    {
+                        type: "line",
+                        name: "WINDOW",
+                        color: "#C24642",
+                        axisYIndex: 0,
+                        showInLegend: true,
+                        dataPoints: arrWM
+                    },
+                    {
+                        type: "line",
+                        name: "LINUX",
+                        color: "#7F6084",
+                        axisYType: 0,
+                        showInLegend: true,
+                        dataPoints: arrLM
+                    }]
+            });
+            chart.render();
+
+            function toggleDataSeries(e) {
+                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                } else {
+                    e.dataSeries.visible = true;
+                }
+                e.chart.render();
+            }
+        }
+
+
+
+    </script>
+
+}

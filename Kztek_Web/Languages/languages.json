@@ -1,0 +1,350 @@
+﻿{
+  "HEADER": {
+
+  },
+
+  "SIBEBAR": {
+
+  },
+
+  "BREADCRUMB": {
+
+  },
+
+  "FOOTER": {
+
+  },
+
+  "BODY": {
+
+    "TITLE": {
+      
+    },
+
+    "SEARCH": {
+
+      "KEYWORD": {
+        "en": "Key word",
+        "vi": "Từ khóa"
+      },
+
+      "FROMDATE": {
+        "en": "From date",
+        "vi": "Từ ngày"
+      },
+
+      "TODATE": {
+        "en": "To date",
+        "vi": "Đến ngày"
+      },
+
+      "LANE": {
+        "en": "Lane",
+        "vi": "Làn"
+      },
+
+      "USER": {
+        "en": "User",
+        "vi": "Người dùng"
+      },
+
+      "NoFilter": {
+        "en": "No Filter",
+        "vi": "Không lọc theo ngày"
+      },
+
+      "FilterByCreated": {
+        "en": "Filter by Date Created",
+        "vi": "Lọc theo ngày tạo"
+      },
+
+      "FilterByExpire": {
+        "en": "Filter by Expire Date",
+        "vi": "Lọc theo ngày hết hạn"
+      },
+
+      "FindAutoCapture": {
+        "en": "Find auto capture",
+        "vi": "Tìm xe chụp ảnh tự động"
+      }
+    },
+
+    "BUTTON": {
+      "SEARCH": {
+        "en": "Search",
+        "vi": "Tìm kiếm"
+      },
+
+      "RESET": {
+        "en": "Reset",
+        "vi": "Nạp lại"
+      },
+
+      "EXCEL": {
+        "en": "Excel",
+        "vi": "Xuất Excel"
+      },
+
+
+      "IMPORT": {
+        "en": "Import",
+        "vi": "Import"
+      },
+
+      "CREATE": {
+        "en": "Create",
+        "vi": "Thêm mới"
+      },
+
+      "UPDATE": {
+        "en": "Update",
+        "vi": "Cập nhật"
+      },
+
+      "DELETE": {
+        "en": "Delete",
+        "vi": "Xóa"
+      },
+
+      "DELETEMULTI": {
+        "en": "Delete multi",
+        "vi": "Xóa nhiều"
+      },
+
+      "SAVE": {
+        "en": "Save & Continue",
+        "vi": "Lưu & tiếp tục"
+      },
+
+      "COMPLETED": {
+        "en": "Completed",
+        "vi": "Hoàn thành"
+      },
+
+      "BACKTOLIST": {
+        "en": "Back to list",
+        "vi": "Quay lại danh sách"
+      },
+
+      "REMOVE": {
+        "en": "Remove",
+        "vi": "Xóa không điều kiện"
+      },
+
+      "Print": {
+        "en": "Print",
+        "vi": "In"
+      }
+    },
+
+    "TABLE": {
+      "NAME": {
+        "en": "Name",
+        "vi": "Tên"
+      },
+
+      "PLATE": {
+        "en": "Plate",
+        "vi": "Biển số"
+      },
+
+      "DESCRIPTION": {
+        "en": "Description",
+        "vi": "Mô tả"
+      },
+
+      "CARDGROUP": {
+        "en": "CardGroup",
+        "vi": "Nhóm thẻ"
+      },
+
+      "CUSTOMERGROUP": {
+        "en": "Customer group",
+        "vi": "Nhóm khách hàng"
+      },
+
+      "STATUS": {
+        "en": "Status",
+        "vi": "Trạng thái"
+      },
+
+      "ACTIVE": {
+        "en": "Active",
+        "vi": "Kích hoạt"
+      },
+
+      "INACTIVE": {
+        "en": "Inactive",
+        "vi": "Chưa kích hoạt"
+      },
+
+      "CARDTYPES": {
+        "en": "CardType",
+        "vi": "Loại thẻ"
+      },
+
+      "ISHAVEMONEYEXCESSTIME": {
+        "en": "include Overtime Fee",
+        "vi": "Tính tiền thẻ thuê bao quá giờ"
+      },
+
+      "VEHICLEGROUP": {
+        "en": "VehicleGroup",
+        "vi": "Nhóm xe"
+      },
+
+      "LANEASSIGN": {
+        "en": "Assign Lane For Card Group",
+        "vi": "Phân làn cho nhóm thẻ"
+      },
+
+      "ENABLEFREE": {
+        "en": "Free Duration",
+        "vi": "Miễn phí trong khoảng thời gian (phút) &lt;="
+      },
+
+      "DayTimeFrom": {
+        "en": "Valid time from",
+        "vi": "TG ban ngày(TG hợp lệ thẻ thuê bao) từ"
+      },
+
+      "DayTimeTo": {
+        "en": "to",
+        "vi": "đến"
+      },
+
+      "Formulation": {
+        "en": "Formulation",
+        "vi": "Tính phí theo"
+      },
+
+      "SortOrder": {
+        "en": "Ordering",
+        "vi": "STT"
+      },
+
+      "IsCheckPlate": {
+        "en": "Check Plate?",
+        "vi": "Kiểm tra biển số"
+      },
+
+      "IsHaveMoneyExpiredDate": {
+        "en": "IsHaveMoneyExpiredDate",
+        "vi": "Tính tiền thuê bao hết hạn sử dụng"
+      },
+
+      "TurnFee": {
+        "en": "Fee",
+        "vi": "Phí lượt"
+      },
+
+      "TimePeriod": {
+        "en": "Time Period",
+        "vi": "Khoảng thời gian"
+      },
+
+      "TimePeriodFee": {
+        "en": "Fee",
+        "vi": "Phí tương ứng"
+      },
+
+      "Block": {
+        "en": "Block",
+        "vi": "Block"
+      },
+
+      "Time": {
+        "en": "Time (minute(s))",
+        "vi": "Thời gian (phút)"
+      },
+
+      "CardNo": {
+        "en": "CardNo",
+        "vi": "CardNo"
+      },
+
+      "CardNumber": {
+        "en": "CardNumber",
+        "vi": "Mã thẻ"
+      },
+
+      "ExpireDate": {
+        "en": "Expire date",
+        "vi": "Ngày hết hạn"
+      },
+
+      "CustomerCode": {
+        "en": "Customer Code",
+        "vi": "Mã KH"
+      },
+
+      "CustomerName": {
+        "en": "Customer Name",
+        "vi": "Tên KH"
+      },
+
+      "Address": {
+        "en": "Address",
+        "vi": "Địa chỉ"
+      },
+
+      "ImportDate": {
+        "en": "Import date",
+        "vi": "Ngày tạo"
+      },
+
+      "LEVEL": {
+        "en": "Level",
+        "vi": "Quyền truy cập"
+      },
+
+      "ExpiredDate": {
+        "en": "Expire date",
+        "vi": "Ngày hết hạn"
+      },
+
+      "ControllerName": {
+        "en": "Controller",
+        "vi": "Tên bộ điều khiển"
+      },
+
+      "ControllerGroup": {
+        "en": "Controller's Group",
+        "vi": "Nhóm bộ điều khiển"
+      },
+      "TotalMoneys": {
+        "en": "TotalMoneys",
+        "vi": "Tổng tiền"
+      }
+    }
+  },
+
+  "STATICLIST": {
+
+    "DEFAULT": {
+      "en": "-- Select --",
+      "vi": "-- Lựa chọn --"
+    }
+
+  },
+  "MESSAGEREPORT": {
+    "ADD": {
+      "SUCCESS": {
+        "en": "Success added",
+        "vi": "Thêm mới thành công"
+      }
+    },
+    "UPDATE": {
+      "SUCCESS": {
+        "en": "Success updated",
+        "vi": "Cập nhật thành công"
+      }
+    },
+    "REMOVE": {
+      "SUCCESS": {
+        "en": "Success removed",
+        "vi": "Xóa thành công"
+      }
+    }
+  }
+}

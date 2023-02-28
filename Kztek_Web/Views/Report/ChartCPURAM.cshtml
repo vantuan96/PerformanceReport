@@ -1,0 +1,184 @@
+﻿@model List<Kztek_Model.Models.CPURAM_ServerLog_Custom>
+@{
+    ViewBag.Title = "Biểu đồ hiệu suất CPU RAM";
+    var authModel = (Kztek_Library.Models.AuthActionModel)ViewBag.AuthValue;
+    var windowMongos = Model != null ? Model.Where(n => n.OS == "WINDOW" && n.Database == "MONGODB").OrderBy(n => n.Type).ToList() : new List<Kztek_Model.Models.CPURAM_ServerLog_Custom>();
+    var linuxMongos = Model != null ? Model.Where(n => n.OS == "LINUX" && n.Database == "MONGODB").OrderBy(n => n.Type).ToList() : new List<Kztek_Model.Models.CPURAM_ServerLog_Custom>();
+
+
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+@*<div class="row">
+        @using (Html.BeginForm("ChartCPURAM", "Report", FormMethod.Get, new { id = "frmUser" }))
+        {
+            <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+                <input type="text" name="key" value="@ViewBag.keyValue" placeholder="Từ khóa" class="form-control" />
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+                <button class="btn btn-white btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm </button>
+                <a href='@Url.Action("ChartCPURAM", "Report")' class="btn btn-primary btn-white" type="submit">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                    Reset
+                </a>
+            </div>
+        }
+    </div>*@
+
+<div id="chartContainer" style="height: 300px; width: 100%;">
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            load();
+        });
+
+        function load() {
+            var dtWinMon = [];
+            var dtLinuxMon = [];
+            Item = function (Type,CPU, RAM) {
+                var obj = this;
+                obj.Type = Type;
+                obj.CPU = CPU;
+                obj.RAM = RAM;
+            }
+
+            @if (windowMongos != null && windowMongos.Count > 0)
+            {
+                foreach(var item in windowMongos)
+                {
+                   @:dtWinMon.push(new Item('@item.Type','@item.AVGCPU', '@item.AVGRAM'));
+                }
+            }
+
+            @if (linuxMongos != null && linuxMongos.Count > 0)
+            {
+                foreach(var item in linuxMongos)
+                {
+                   @:dtLinuxMon.push(new Item('@item.Type','@item.AVGCPU', '@item.AVGRAM'));
+                }
+            }
+
+            LoadChartMongo(dtWinMon,dtLinuxMon);
+
+        }
+        function LoadChartMongo(dtWinMon,dtLinuxMon) {
+            var arrWMCPU = [];//window cpu
+            var arrWMRAM = [];//window ram
+            var arrLMCPU = [];//linux cpu
+            var arrLMRAM = [];//linux ram
+
+            //window
+            for (i = 0; i < dtWinMon.length; i++) {
+                var objWMCPU = {
+                    label: dtWinMon[i].Type,
+                    y: parseInt(dtWinMon[i].CPU)
+                }
+                var objWMRAM = {
+                    label: dtWinMon[i].Type,
+                    y: parseInt(dtWinMon[i].RAM)
+                }
+
+                arrWMCPU.push(objWMCPU);
+                arrWMRAM.push(objWMRAM);
+            }
+
+            //linux
+            for (i = 0; i < dtLinuxMon.length; i++) {
+                var objLMCPU = {
+                    label: dtLinuxMon[i].Type,
+                    y: parseInt(dtLinuxMon[i].CPU)
+                }
+                var objLMRAM = {
+                    label: dtLinuxMon[i].Type,
+                    y: parseInt(dtLinuxMon[i].RAM)
+                }
+
+                arrLMCPU.push(objLMCPU);
+                arrLMRAM.push(objLMRAM);
+            }
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: "CHART MONGODB"
+                },
+                axisY: [{
+                    title: "CPU",
+                    lineColor: "#C24642",
+                    tickColor: "#C24642",
+                    labelFontColor: "#C24642",
+                    titleFontColor: "#C24642",
+                    suffix: "%"
+                }],
+                axisY2: {
+                    title: "RAM",
+                    lineColor: "#7F6084",
+                    tickColor: "#7F6084",
+                    labelFontColor: "#7F6084",
+                    titleFontColor: "#7F6084",
+                    suffix: "MB"
+                },
+                toolTip: {
+                    shared: true
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: toggleDataSeries
+                },
+                data: [
+                    {
+                        type: "line",
+                        name: "CPU WINDOW",
+                        color: "#C24642",
+                        axisYIndex: 0,
+                        showInLegend: true,
+                        dataPoints: arrWMCPU
+                    },
+                    {
+                        type: "line",
+                        name: "RAM WINDOW",
+                        color: "#7F6084",
+                        axisYType: "secondary",
+                        showInLegend: true,
+                        dataPoints: arrWMRAM
+                    },
+                    {
+                        type: "line",
+                        name: "CPU LINUX",
+                        color: "#116EB0",
+                        axisYIndex: 0,
+                        showInLegend: true,
+                        dataPoints: arrLMCPU
+                    },
+                    {
+                        type: "line",
+                        name: "RAM LINUX",
+                        color: "#0B4230",
+                        axisYType: "secondary",
+                        showInLegend: true,
+                        dataPoints: arrLMRAM
+                    }]
+            });
+            chart.render();
+
+            function toggleDataSeries(e) {
+                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                } else {
+                    e.dataSeries.visible = true;
+                }
+                e.chart.render();
+            }
+        }
+
+
+
+    </script>
+
+}

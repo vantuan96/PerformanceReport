@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "mongodb://admin:Futech12345678@125.212.226.137:712/test_performance",
+    "DefaultType": "MONGO"
+  }
+}
